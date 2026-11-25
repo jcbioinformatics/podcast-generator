@@ -1,12 +1,15 @@
 FROM ubuntu:latest
 
-RUN apt update && apt install -y \
-    python3.10 \
-    python3-pip \
-    git
+RUN apt-get update 
 
+RUN apt-get install -y python3.14
+RUN apt-get install -y python3-pip
 
-RUN pip3 install PyYAML
+RUN apt-get install -y git
+
+# Should be alright for temporary use like GitHub actions
+# https://stackoverflow.com/a/75722775
+RUN pip install PyYAML --break-system-packages
 
 COPY feed.py /usr/bin/feed.py
 
